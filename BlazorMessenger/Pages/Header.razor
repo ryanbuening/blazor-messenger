@@ -1,0 +1,20 @@
+﻿<h3>Header</h3>
+
+@Count
+
+@inject IMessenger _messenger
+
+@code {
+    public int Count { get; set; }
+
+    protected override void OnInitialized()
+    {
+        _messenger.Register<CountModifiedMessage>(this, (_, m) => CountModifiedHandler(m));
+    }
+
+    private void CountModifiedHandler(CountModifiedMessage message)
+    {
+        Count = message.Count;
+        StateHasChanged();
+    }
+}

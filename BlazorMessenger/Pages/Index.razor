@@ -1,0 +1,21 @@
+﻿@page "/"
+
+<Header></Header>
+
+<h3>Index</h3>
+
+<button @onclick="IncrementCount">Increment Count</button>
+
+@Count
+
+@inject IMessenger _messenger
+
+@code {
+    public int Count { get; set; }
+
+    public void IncrementCount()
+    {
+        Count++;
+        _messenger.Send(new CountModifiedMessage { Count = Count });
+    }
+}
